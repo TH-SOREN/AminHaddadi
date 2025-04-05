@@ -18,18 +18,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="canonical" href="https://aminhadadi.com/" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M67NQYVLLZ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-M67NQYVLLZ');
-    </script>
-
     <meta property="og:title" content="امین حدادی - Amin Haddadi">
-    <meta property="og:description" content="سایت شخصی امین حدادی، کتاب‌ها و ترجمه‌های ادبی">
     <meta property="og:image" content="https://aminhadadi.com/images/profile.jpg">
     <meta property="og:url" content="https://aminhadadi.com">
     <meta property="og:type" content="website">
@@ -566,18 +555,14 @@
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             z-index: 2000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: none; /* به جای opacity: 0 */
+            transition: all 0.3s ease;
             font-size: 15px;
             font-weight: 700;
         }
 
         #notification.show {
-            opacity: 1;
-        }
-
-        #notification.hide {
-            opacity: 0;
+            display: block;
         }
 
         #notification.success {
@@ -959,7 +944,7 @@
                 </div>
             </div>
             <div class="book-card">
-                <img src="images/book3.jpg" alt="منظومه اذن دخول | The Permission to Enter Poem">
+                <img src="images/book3.jpg" alt="منظومه اذن دخول | mission to EntThe Perer Poem">
                 <div class="lang-fa">
                     <h3>منظومه اذن دخول</h3>
                     <p>امین حدادی | نشر بارو، ۱۴۰۲</p>
@@ -969,8 +954,8 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>The Permission to Enter Poem</h3>
-                    <p>Amin Haddadi | Baru Publishing, 2023</p>
+                    <h3>The Entrance Permission Cycle</h3>
+                    <p>Amin Haddadi | Baru 2023</p>
                     <div class="card-footer"> 
                         <a href="files/کتاب_اذن_دخول_امین_حدادی.pdf" download>Download PDF</a>
                     </div>
@@ -987,8 +972,9 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>Conversation with the Embryo</h3>
-                    <p>With two unfinished letters</p>
+                    <h3>Dialogue with the Germen</h3>
+                    <p>With Two Unfinished Letters</p>
+                    <p>Amin Haddadi | Beyraqhā va Lakkehā 2025</p>
                     <div class="card-footer">
                         <a href="files/book4.pdf" download>Coming Soon ...</a>
                     </div>
@@ -1017,7 +1003,7 @@
                     <p>امین حدادی | ۱۴۰۴-۱۴۰۱، با مراقبت گالری دوست</p>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>Prism of Light Wound</h3>
+                    <h3>The Prism of the Wound of light</h3>
                     <p>Trilingual ekphrasis:</p>
                     <p>Persian-English-French</p>
                     <p>Amin Haddadi | 2022-2025, curated by Doost Gallery</p>
@@ -1034,7 +1020,7 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>Spring Poem Despite Fear</h3>
+                    <h3>A Spring Ode Despite the Horror</h3>
                     <p>Poem and voice by Amin Haddadi | Nowruz 2024 | Baru</p>
                     <div class="card-footer">
                         <audio controls preload="metadata" src="files/poem2.mp3"></audio>
@@ -1051,7 +1037,7 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>Scar Flower or Excess Memory Flesh</h3>
+                    <h3>Flowerwound or the proud flesh of memory</h3>
                     <p>Amin Haddadi | 2018</p>
                     <div class="card-footer">
                         <audio controls preload="metadata" src="files/poem3.mp3"></audio>
@@ -1085,7 +1071,7 @@
                         <a href="https://baru.ir/mag-contents/booklet-of-six-poems/" target="_blank">خواندن ترجمه</a>
                     </div>
                     <div class="lang-en" style="display: none;">
-                        <h3>Booklet of Six Poems</h3>
+                        <h3>An Anthology of Six Poems</h3>
                         <p>Ingeborg Bachmann-Paul Celan</p>
                         <p>Translated by Amin Haddadi | Baru, 2023</p>
                         <a href="https://baru.ir/mag-contents/booklet-of-six-poems/" target="_blank">Read Translation</a>
@@ -1102,7 +1088,7 @@
                         <a href="https://baru.ir/poem/ingeborg-bachmann-seven-poems/" target="_blank">خواندن ترجمه</a>
                     </div>
                     <div class="lang-en" style="display: none;">
-                        <h3>Ingeborg Bachmann Booklet</h3>
+                        <h3>A Selection of Seven Poems by Ingeborg Bachmann</h3>
                         <p>Seven Poems</p>
                         <p>Translated by Amin Haddadi | Baru, 2024</p>
                         <a href="https://baru.ir/poem/ingeborg-bachmann-seven-poems/" target="_blank">Read Translation</a>
@@ -1132,8 +1118,8 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>A Young Poet’s Letter to a Young Poet</h3>
-                    <p>Questioning the pre-Baudelairean state of modern Persian poetry.</p>
+                    <h3>A Young Poet's Letter to a Young Poem</h3>
+                    <p>A Question about the pre-baudelairean State of Modern Persian Poetry</p>
                     <p>Amin Haddadi | Poetica Project, 2019</p>
                     <div class="card-footer">
                         <a href="files/وضعیت_ماقبل_بودلری_شعر_فارسی.pdf" download>Download PDF</a>
@@ -1151,7 +1137,7 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>In the “Vav” of Mentor and Stimulus</h3>
+                    <h3>On the "and" of the Mentor and the Stimulus</h3>
                     <p>Aref, Vaziri, Khaleghi: Unfinished encounters.</p>
                     <p>Amin Haddadi | Poetica Project, 2019</p>
                     <div class="card-footer">
@@ -1170,7 +1156,7 @@
                     </div>
                 </div>
                 <div class="lang-en" style="display: none;">
-                    <h3>Atlas of Exile</h3>
+                    <h3>Atlas of Foreignness</h3>
                     <p>Revisiting “A Few Scenes” by Mahmoud Davoudi; poems 1991-2003, Arvij Publishing.</p>
                     <p>Portrait of Mahmoud Davoudi</p>
                     <div class="card-footer">
@@ -1349,38 +1335,40 @@
     
         const form = document.getElementById('contact-form');
         const notification = document.getElementById('notification');
-    
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
+
             try {
-                const response = await fetch('https://formspree.io/f/xyzezdoe', {
+                const response = await fetch('https://formspree.io/f/xyzezdoe', { // مطمئن شو این ID درست باشه
                     method: 'POST',
                     body: formData,
                     headers: { 'Accept': 'application/json' }
                 });
+
                 if (response.ok) {
                     showNotification(isPersian ? 'پیام شما با موفقیت ارسال شد!' : 'Your message was sent successfully!', 'success');
                     form.reset();
                 } else {
+                    const errorText = await response.text();                                                                                                                                                                                                                                                
+                    console.error('خطای سرور:', errorText); // برای دیباگ
                     showNotification(isPersian ? 'خطایی رخ داد. لطفاً دوباره تلاش کنید.' : 'An error occurred. Please try again.', 'error');
                 }
             } catch (error) {
-                showNotification(isPersian ? 'خطایی رخ داد. لطفاً دوباره تلاش کنید.' : 'An error occurred. Please try again.', 'error');
+                console.error('خطای شبکه:', error); // برای دیباگ
+                showNotification(isPersian ? 'خطای شبکه! لطفاً اتصال خود را بررسی کنید.' : 'Network error! Please check your connection.', 'error');
             }
         });
-    
+
         function showNotification(message, type) {
             notification.textContent = message;
-            notification.className = `notification ${type}`;
+            notification.className = `notification ${type}`; // تنظیم کلاس بر اساس نوع
             notification.classList.add('show');
+
             setTimeout(() => {
                 notification.classList.remove('show');
-                notification.classList.add('hide');
-            }, 4000);
-            setTimeout(() => {
-                notification.classList.remove('hide');
-            }, 4400);
+            }, 4000); // 4 ثانیه نمایش داده می‌شه
         }
     
         let isMediaPlaying = false;
