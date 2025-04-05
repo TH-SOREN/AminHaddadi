@@ -1242,32 +1242,61 @@
         const langFaSwitch = document.getElementById('lang-fa');
         const langEnSwitch = document.getElementById('lang-en');
         let isPersian = true;
-    
+
+        // تابع برای مدیریت فیلدهای فعال/غیرفعال
+        function updateFormFields() {
+            const faFields = document.querySelectorAll('.lang-fa input, .lang-fa textarea');
+            const enFields = document.querySelectorAll('.lang-en input, .lang-en textarea');
+
+            if (isPersian) {
+                // وقتی زبان فارسی است
+                faFields.forEach(field => {
+                    field.removeAttribute('disabled');
+                    field.setAttribute('required', 'true');
+                });
+                enFields.forEach(field => {
+                    field.setAttribute('disabled', 'true');
+                    field.removeAttribute('required');
+                });
+            } else {
+                // وقتی زبان انگلیسی است
+                faFields.forEach(field => {
+                    field.setAttribute('disabled', 'true');
+                    field.removeAttribute('required');
+                });
+                enFields.forEach(field => {
+                    field.removeAttribute('disabled');
+                    field.setAttribute('required', 'true');
+                });
+            }
+        }
+
         // بررسی URL موقع لود صفحه
         window.addEventListener('load', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang');
             if (lang === 'en') {
-                toggleLanguage(); // اگه lang=en بود، به انگلیسی تغییر بده
+                toggleLanguage();
             }
+            updateFormFields(); // تنظیم اولیه فیلدها
         });
-    
+
         langFaSwitch.addEventListener('click', () => {
             if (isPersian) {
-                toggleLanguage(); // تغییر به انگلیسی
-                window.history.pushState({}, document.title, '?lang=en'); // اضافه کردن ?lang=en به URL
+                toggleLanguage();
+                window.history.pushState({}, document.title, '?lang=en');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
-    
+
         langEnSwitch.addEventListener('click', () => {
             if (!isPersian) {
-                toggleLanguage(); // تغییر به فارسی
-                window.history.pushState({}, document.title, window.location.pathname); // حذف پارامتر lang
+                toggleLanguage();
+                window.history.pushState({}, document.title, window.location.pathname);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
-    
+
         function toggleLanguage() {
             const faElements = document.querySelectorAll('.lang-fa');
             const enElements = document.querySelectorAll('.lang-en');
@@ -1285,69 +1314,23 @@
                 document.title = 'امین حدادی';
             }
             isPersian = !isPersian;
+            updateFormFields(); // به‌روزرسانی فیلدها بعد از تغییر زبان
         }
-    
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetSection = document.querySelector(this.getAttribute('href'));
-                const navUl = document.querySelector('nav ul');
-                if (window.innerWidth <= 768 && navUl.classList.contains('active')) {
-                    navUl.classList.remove('opening');
-                    navUl.classList.add('closing');
-                    setTimeout(() => {
-                        navUl.classList.remove('active', 'closing');
-                        navUl.style.display = 'none';
-                        targetSection.scrollIntoView({ behavior: 'smooth' });
-                    }, 400);
-                } else {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-    
-        sections.forEach(section => observer.observe(section));
-    
-        const hamburger = document.querySelector('.hamburger');
-        const navUl = document.querySelector('nav ul');
-    
-        hamburger.addEventListener('click', () => {
-            if (navUl.classList.contains('active')) {
-                navUl.classList.remove('opening');
-                navUl.classList.add('closing');
-                setTimeout(() => {
-                    navUl.classList.remove('active', 'closing');
-                    navUl.style.display = 'none';
-                }, 400);
-            } else {
-                navUl.style.display = 'flex';
-                navUl.classList.add('active', 'opening');
-                setTimeout(() => {
-                    navUl.classList.remove('opening');
-                }, 400);
-            }
-        });
-    
-        const form = document.getElementById('contact-form');
-        const notification = document.getElementById('notification');
 
         // تابع برای تشخیص زبان فعلی
         function getCurrentLanguage() {
             return document.documentElement.getAttribute('lang') || 'fa'; // پیش‌فرض فارسی
         }
 
+        const form = document.getElementById('contact-form');
+        const notification = document.getElementById('notification');
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
+
+            // لاگ برای دیباگ
+            console.log('Form data:', Object.fromEntries(formData));
 
             try {
                 const response = await fetch('https://formspree.io/f/xyzezdoe', {
@@ -1355,6 +1338,8 @@
                     body: formData,
                     headers: { 'Accept': 'application/json' }
                 });
+
+                console.log('Response status:', response.status); // لاگ برای دیباگ
 
                 const currentLang = getCurrentLanguage();
                 if (response.ok) {
@@ -1370,6 +1355,7 @@
                     );
                 }
             } catch (error) {
+                console.error('Fetch error:', error); // لاگ برای دیباگ
                 const currentLang = getCurrentLanguage();
                 showNotification(
                     currentLang === 'fa' ? 'خطایی رخ داد. لطفاً دوباره تلاش کنید.' : 'An error occurred. Please try again.',
@@ -1380,10 +1366,9 @@
 
         function showNotification(message, type) {
             notification.textContent = message;
-            notification.className = `notification ${type}`; // بازنشانی کلاس‌ها
+            notification.className = `notification ${type}`;
             notification.classList.add('show');
 
-            // مخفی کردن بعد از 4 ثانیه
             setTimeout(() => {
                 notification.classList.remove('show');
             }, 4000);
