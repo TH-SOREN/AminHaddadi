@@ -548,20 +548,66 @@
             position: fixed;
             top: 70px;
             left: 50%;
-            transform: translateX(-50%);
-            background: #333;
+            transform: translateX(-50%) scale(0.8);
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
             color: #FFFFFF;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             z-index: 2000;
             opacity: 0;
-            transition: opacity 0.3s ease;
             font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
         }
 
         #notification.show {
             opacity: 1;
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s ease forwards, shake 0.3s ease 0.5s, fadeOut 0.5s ease 2.5s forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translateX(-50%) scale(0.8);
+                opacity: 0;
+            }
+            60% {
+                transform: translateX(-50%) scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            25% {
+                transform: translateX(-54%) scale(1);
+            }
+            50% {
+                transform: translateX(-46%) scale(1);
+            }
+            75% {
+                transform: translateX(-52%) scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.8);
+            }
         }
 
         #about p {
@@ -1380,12 +1426,11 @@
         const langEnSwitch = document.getElementById('lang-en');
         let isPersian = true;
     
-        // بررسی URL موقع لود صفحه
         window.addEventListener('load', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang');
             if (lang === 'en') {
-                toggleLanguage(); // اگه lang=en بود، به انگلیسی تغییر بده
+                toggleLanguage(); 
             }
         });
     
@@ -1502,9 +1547,6 @@
         function showNotification(message) {
             notification.textContent = message;
             notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000); 
         }
     
         let isMediaPlaying = false;
